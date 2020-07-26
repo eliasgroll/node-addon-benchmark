@@ -1,0 +1,35 @@
+{
+    "name": "node-addon-benchmark",
+    "version": "1.0.0",
+    "description": "Benchmarks the time needed for an amount of invocations per second between a node process and a std::thread running in a node addon.",
+    "main": "index.js",
+    "repository": "https://github.com/eliasgroll/node-addon-benchmark.git",
+    "author": "Elias Groll",
+    "license": "MIT",
+    "scripts": {
+        "_cpp": "node-gyp configure build",
+        "_noThrottle": "node index.js 10000000 100 256",
+        "_throtteledCpu": "node index.js 10000000 1 256",
+        "_throtteledRam": "node --max-old-space-size=10 index.js 10000000 100 10",
+        "_throtteledCpuAndRam": "node --max-old-space-size=10 index.js 10000000 1 10",
+        "benchmark": "run-s _cpp _noThrottle _throtteledCpu _throtteledRam _throtteledCpuAndRam"
+    },
+    "deps": {
+        "node-addon-api": "1.6.3",
+        "bindings": "1.5.0",
+        "napi-thread-safe-callback": "0.0.6",
+        "cpulimit": "1.1.4"
+    },
+    "gypfile": true,
+    "dependencies": {
+        "bindings": "1.5.0",
+        "cpulimit": "^1.1.4",
+        "napi-thread-safe-callback": "0.0.6",
+        "node-addon-api": "1.6.3",
+        "npm-run-all": "^4.1.5",
+        "serialport": "^8.0.7"
+    },
+    "devDependencies": {
+        "node-gyp": "6.1.0"
+    }
+}
