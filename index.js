@@ -8,7 +8,7 @@ const ram = args[2];
 console.log(`${amount} invocations, ${cpuPercentage}% cpu, ${ram}mb ram`);
 
 cpuLimit.createProcessFamily({
-    limit: cpuPercentage / 100,
+    limit: cpuPercentage,
     includeChildren: true,
     pid: 2324
 }, () => {
